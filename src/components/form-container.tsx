@@ -11,7 +11,7 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   children,
 }) => {
   return (
-    <div className="self-center justify-self-center w-full px-6">
+    <div className="self-center justify-self-center w-full px-6 mt-4">
       <div className="mx-auto sm:max-w-[30rem] bg-background  py-6 px-4 rounded-lg sm:px-10 sm:pb-6 sm:shadow border">
         <div className="sm:mx-auto w-full sm:max-w-md mb-8 text-center">
           {typeof heading === 'string' ? (

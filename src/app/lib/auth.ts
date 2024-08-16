@@ -70,7 +70,7 @@ export const options = {
           throw new Error("User with this email already exists");
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10); // Using 10 as salt rounds
+        const hashedPassword = await bcrypt.hash(password, 10); 
 
         const user = await prisma.user.create({
           data: {
