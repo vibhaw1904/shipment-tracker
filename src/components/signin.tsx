@@ -65,7 +65,7 @@ const Signin = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-10 bg-blue-600 text-white font-medium rounded-md"
+          className="w-full h-10 bg-blue-500 hover:bg-blue-400 text-white font-medium rounded-md"
         >
           {isSubmitting ? 'Please wait...' : 'Sign In'
 }

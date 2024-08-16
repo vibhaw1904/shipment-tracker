@@ -13,27 +13,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 model User {
-  id    String  @id @default(uuid())
-  name  String?
-  email String  @unique
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
   emailVerified DateTime?
-  password String
-  image String?
-  role       Role    @default(USER)
-
-  // Add any other fields you'd like
-  // e.g. role Role @default(USER)
+  password      String
+  image         String?
+  role          Role      @default(USER)
 }
 
+// model Shipment {
+//   id            String   @id @default(uuid())
+//   trackingNumber String   @unique
+//   status        String
+//   location      String
+//   estimatedDelivery DateTime
+// }
 model Shipment {
-  id            String   @id @default(uuid())
-  trackingNumber String   @unique
-  status        String
-  location      String
+  id               String   @id @default(uuid())
+  productName      String
+  trackingNumber   String   @unique
+  status           String   @default("Processing")
+  location         String
+  placedAt         DateTime @default(now())
   estimatedDelivery DateTime
+  address          String
+  note             String?
+  userEmail        String
 }
 
 enum Role {

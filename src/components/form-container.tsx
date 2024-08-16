@@ -11,21 +11,25 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   children,
 }) => {
   return (
-    <div className="self-center justify-self-center w-full px-6 mt-4">
-      <div className="mx-auto sm:max-w-[30rem] bg-background  py-6 px-4 rounded-lg sm:px-10 sm:pb-6 sm:shadow border">
-        <div className="sm:mx-auto w-full sm:max-w-md mb-8 text-center">
+    <div className="self-center justify-self-center w-full px-6 mt-8 mb-16">
+      <div className="bg-gray-800 backdrop-filter backdrop-blur-lg mx-auto sm:max-w-[30rem] py-8 px-6 rounded-xl sm:px-10 sm:shadow-2xl border border-gray-700 transition-all duration-300 hover:shadow-blue-500/20">
+        <div className="sm:mx-auto w-full sm:max-w-md mb-10 text-center">
           {typeof heading === 'string' ? (
-            <h1 className="text-3xl font-bold mb-2">{heading}</h1>
+            <h1 className="text-4xl font-bold mb-3 text-blue-400 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
+              {heading}
+            </h1>
           ) : (
             heading
           )}
           {typeof description === 'string' ? (
-            <p className="text-muted-foreground text-sm">{description}</p>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              {description}
+            </p>
           ) : (
             description
           )}
         </div>
-        {children}
+        <div className="space-y-6">{children}</div>
       </div>
     </div>
   );

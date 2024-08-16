@@ -2,6 +2,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 const LandingPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,9 +28,13 @@ const LandingPage: React.FC = () => {
               TrackWise provides real-time updates and detailed insights for all your shipments. 
               Stay informed and in control of your logistics with our advanced tracking system.
             </p>
-            <Link href="/dashboard" className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300 inline-block hover:shadow-lg hover:scale-105 transform">
+            
+            <button   className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300 inline-block hover:shadow-lg hover:scale-105 transform"            onClick={() => signIn('credentials', { callbackUrl: '/' })}
+            >
               Get Started
-            </Link>
+
+            </button>
+            
           </div>
           <div className={`bg-gray-800 p-8 rounded-lg shadow-xl transition-all duration-1000 delay-500 ease-out ${isVisible ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform translate-x-10'}`}>
             <h3 className="text-2xl font-semibold mb-4 text-blue-300">Key Features</h3>
