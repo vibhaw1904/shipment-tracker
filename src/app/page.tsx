@@ -1,7 +1,9 @@
-import Image from "next/image";
+import LandingPage from "@/components/Landing";
 
 export default function Home() {
   return (
-  <div>hey  welcome please login</div>
+  <div>
+    <LandingPage/>
+  </div>
   );
 }
