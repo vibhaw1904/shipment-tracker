@@ -23,18 +23,12 @@ model User {
   role          Role      @default(USER)
 }
 
-// model Shipment {
-//   id            String   @id @default(uuid())
-//   trackingNumber String   @unique
-//   status        String
-//   location      String
-//   estimatedDelivery DateTime
-// }
+
 model Shipment {
   id               String   @id @default(uuid())
   productName      String
   trackingNumber   String   @unique
-  status           String   @default("Processing")
+  status           OnRampStatus
   location         String
   placedAt         DateTime @default(now())
   estimatedDelivery DateTime
@@ -43,6 +37,13 @@ model Shipment {
   userEmail        String
 }
 
+enum OnRampStatus{
+  Ordered
+  shipped
+  out_for_delivery
+  delivered
+
+}
 enum Role {
   USER
   ADMIN
