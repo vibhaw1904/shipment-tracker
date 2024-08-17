@@ -1,3 +1,4 @@
+import AdminDashBoard from '@/components/AdminDashBoard';
 import React from 'react';
 
 type pageProps = {
@@ -7,6 +8,6 @@ type pageProps = {
 
 const page:React.FC<pageProps> = () => {
     
-    return <div>Have a good coding</div>
+    return <div><AdminDashBoard/></div>
 }
 export default page;
