@@ -19,7 +19,7 @@ const BuyProductForm: React.FC<BuyProductFormProps> = ({ userEmail }) => {
     address: '',
     email: userEmail,
   });
-  const [isSubmitting,setIsSUbmitting]=useState(false);
+  const [isSubmitting,setIsSubmitting]=useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -29,11 +29,36 @@ const BuyProductForm: React.FC<BuyProductFormProps> = ({ userEmail }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
-    console.log('Form submitted:', formData);
-  };
+   setIsSubmitting(true);
+   const response=await fetch('/api/placeOrder/',{
+    method:'POST',
+    headers:{
+      'Content-Type': 'application/json',
+
+    },
+    body: JSON.stringify({
+      productName:formData.productName,
+      address:formData.address,
+      note:formData.note,
+      userEmail:formData.email,
+    }),
+  });
+
+  if (response.ok) {
+    // Handle success (e.g., redirect, show a success message)
+    console.log(response.json());
+    
+  } else {
+    // Handle error
+    console.error('Failed to place order');
+  }
+
+  setIsSubmitting(false);
+
+   }
+  
 
   return (
     <div className="bg-gray-900 text-white p-8 rounded-lg max-w-md mx-auto">
