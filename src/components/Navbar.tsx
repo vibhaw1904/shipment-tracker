@@ -2,30 +2,41 @@
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-const Navbar = () => {
-  const { data: session } = useSession();
-  console.log(session);
+const Navbar: React.FC = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated' && session?.user?.role === 'ADMIN') {
+      router.push('/admin');
+    }
+  }, [status, session, router]);
+
+  const isAdmin = session?.user?.role === 'ADMIN';
 
   return (
     <nav className="bg-gray-800 p-4 shadow-md">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <Link href="/" className="text-3xl text-blue-400 font-bold mb-4 md:mb-0">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link href="/" className="text-3xl text-blue-400 font-bold">
           TrackWise
         </Link>
-        <div className='flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 mb-4 md:mb-0'>
-        <Link href="/user" className="text-gray-300 hover:text-white transition duration-300">
+        <div className="flex space-x-4">
+          <Link href={isAdmin?'/admin':'/user'} className="text-gray-300 hover:text-white transition duration-300">
             Home
           </Link>
-          <Link href="/orders" className="text-gray-300 hover:text-white transition duration-300">
-            Your orders
-          </Link>
-          <Link href="/buy" className="text-gray-300 hover:text-white transition duration-300">
-            Place order
-          </Link>
-          <Link href="/admin" className="text-gray-300 hover:text-white transition duration-300">
-            Admin
-          </Link>
+          {session && !isAdmin && (
+            <>
+              <Link href="/orders" className="text-gray-300 hover:text-white transition duration-300">
+                Your Orders
+              </Link>
+              <Link href="/buy" className="text-gray-300 hover:text-white transition duration-300">
+                Place Order
+              </Link>
+            </>
+          )}
         </div>
         <div className="flex items-center">
           {session ? (

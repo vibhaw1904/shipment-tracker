@@ -2,8 +2,9 @@ import { prisma } from "./db";
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
 
-export const options = {
+export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "signin",
@@ -12,7 +13,7 @@ export const options = {
         email: { label: "Email", type: "email", placeholder: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password are required");
         }
@@ -22,7 +23,7 @@ export const options = {
         const user = await prisma.user.findUnique({
           where: { email },
           select: {
-            email:true,
+            email: true,
             id: true,
             name: true,
             password: true,
@@ -55,7 +56,7 @@ export const options = {
         email: { label: "Email", type: "email", placeholder: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password || !credentials?.name) {
           throw new Error("Name, email, and password are required");
         }
@@ -71,7 +72,7 @@ export const options = {
           throw new Error("User with this email already exists");
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10); 
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await prisma.user.create({
           data: {
@@ -98,7 +99,7 @@ export const options = {
   ],
   callbacks: {
     jwt({ token, user, trigger, session }) {
-      if (trigger === "update") {
+      if (trigger === "update" && session?.user) {
         return {
           ...token,
           ...session.user,
@@ -112,7 +113,7 @@ export const options = {
       return token;
     },
     session({ session, token }) {
-      if (token && session && session.user) {
+      if (token && session?.user) {
         session.user.id = token.id;
         session.user.role = token.role;
       }
@@ -129,4 +130,4 @@ export const options = {
   pages: {
     signIn: "/signin",
   },
-} satisfies NextAuthOptions;
+};
