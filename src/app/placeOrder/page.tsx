@@ -1,3 +1,4 @@
+'use client'
 import BuyProductForm from '@/components/orderProduct';
 import { useSession } from 'next-auth/react';
 import React from 'react';

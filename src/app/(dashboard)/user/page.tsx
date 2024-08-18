@@ -1,7 +1,7 @@
 'use client'; 
 
-import BuyProductForm from '@/components/orderProduct';
-import { useSession } from 'next-auth/react';
+
+import UserDashboard from '@/components/userHome';
 import React from 'react';
 
 type pageProps = {
@@ -11,7 +11,7 @@ type pageProps = {
 const page:React.FC<pageProps> = () => {
     
     return <div>
-        hey 
+       <UserDashboard/>
     </div>
 }
 export default page;
