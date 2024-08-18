@@ -13,6 +13,9 @@ const Navbar: React.FC = () => {
     if (status === 'authenticated' && session?.user?.role === 'ADMIN') {
       router.push('/admin');
     }
+    if (status === 'authenticated' && session?.user?.role === 'USER') {
+      router.push('/user');
+    }
   }, [status, session, router]);
 
   const isAdmin = session?.user?.role === 'ADMIN';
