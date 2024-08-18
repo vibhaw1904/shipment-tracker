@@ -102,11 +102,11 @@ const handleLocationSave = (orderId: string) => {
                           onChange={(e) => updateOrder(order.id, { status: e.target.value })}
                           className="mt-1 block w-full py-2 px-3 border border-gray-700 bg-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white"
                       >
-                          <option value="Processing">Ordered</option>
+                          <option value="Ordered">Ordered</option>
                           <option value="Shipped">Shipped</option>
                           <option value="Delivered">Delivered</option>
-                          <option value="Out for Delivery">Out for Delivery</option>
-                          <option value="Cancelled">Cancelled</option>
+                          <option value="out_for_delivery">Out for Delivery</option>
+                          <option value="Canceled">Canceled</option>
                       </select>
                   </div>
                   <div className="mt-4">

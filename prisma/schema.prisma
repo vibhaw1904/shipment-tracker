@@ -28,7 +28,7 @@ model Shipment {
   id               String   @id @default(uuid())
   productName      String
   trackingNumber   String   @unique
-  status           OnRampStatus
+  status           OnRampStatus @default(Ordered)
   location         String
   placedAt         DateTime @default(now())
   estimatedDelivery DateTime
@@ -39,10 +39,11 @@ model Shipment {
 
 enum OnRampStatus{
   Ordered
-  shipped
+  Shipped
   out_for_delivery
-  delivered
-
+  Delivered
+  Canceled
+  
 }
 enum Role {
   USER

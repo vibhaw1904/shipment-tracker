@@ -42,7 +42,7 @@ const UserDashboard = () => {
     switch (status) {
       case 'Ordered': return 0;
       case 'Shipped': return 1;
-      case 'Out for Delivery': return 2;
+      case 'out_for_delivery': return 2;
       case 'Delivered': return 3;
       case 'Canceled': return -1;
       default: return 0;

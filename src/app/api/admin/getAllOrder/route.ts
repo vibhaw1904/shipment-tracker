@@ -1,16 +1,21 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import { prisma } from "@/app/lib/db"
-import { getToken } from "next-auth/jwt"
-
-export async function GET(request: NextRequest) {
+import { getServerSession } from "next-auth/next"
+import { options } from "@/app/lib/auth"
+export async function GET(request: Request) {
     try {
-        const token = await getToken({ req: request })
+        const session = await getServerSession(options)
 
-        if (!token || !token.email) {
+        if (!session || !session.user?.email) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         }
 
+        
+        const userEmail = session.user.email
+
+        
         const orders = await prisma.shipment.findMany({
+            
             orderBy: {
                 placedAt: 'desc'
             }
