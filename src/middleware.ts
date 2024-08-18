@@ -13,6 +13,7 @@ export async function middleware(req: NextRequest) {
   // 3. The token exists
 
   if (
+    
     pathname === '/' ||
     pathname.startsWith('/api/auth') ||
     token

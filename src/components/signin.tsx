@@ -22,9 +22,12 @@ const Signin = () => {
     });
 
     setIsSubmitting(false);
-    router.push('/user');
 
-    
+    if (result?.ok) {
+      router.push('/user');
+    } else {
+      console.error('Failed to sign in');
+    }
   };
 
   return (
